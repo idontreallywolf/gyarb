@@ -86,7 +86,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	 *	inversely relative to the position of player
 	 *	if player goes RIGHT, all other game objects go LEFT  
 	 */
-	Camera cam;
+	public static Camera cam;
 
 	
 	/*
@@ -143,7 +143,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
         stars.render(g);
         
 		////////////////////////////////////////////////
-
 		g.translate(cam.getX(), cam.getY()); // cam begin
 		handler.render(g, deltaTime);
 		g.translate(-cam.getX(), -cam.getY()); // cam end
@@ -343,8 +342,13 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	}
 	
-	private static double fps = 1.0/30.0;
-	private static double ups = 1.0/30.0;
+	// TODO: ADD in-game speed adjust (timescale)
+	// TODO: ADD particle generation timer
+	// TODO: ADD 
+	
+	private static double timescale = 1.0;
+	private static double fps = 1.0/120.0;
+	private static double ups = 1.0/60.0;
 	private static long lastTime = System.nanoTime();
 	private static double deltaF = 0;
 	private static double deltaU = 0;
@@ -365,12 +369,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 			deltaU += (System.nanoTime() - lastTime) / 1000000000.0;
 			
 			if (deltaU >= ups) {
-				update((float)(deltaU / ups), (float)(deltaU));
+				update((float)((deltaU / ups) * timescale), (float)(deltaU * timescale));
 				deltaU -= ups;
 			}
 			
 			if (deltaF >= fps) {
-				render((float)(deltaF / fps), (float)(deltaF));
+				render((float)((deltaF / fps) * timescale), (float)(deltaF * timescale));
 				deltaF -= fps;
 			}
 
