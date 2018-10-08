@@ -74,12 +74,13 @@ public class ParticleManager {
 class Particle {
 	
 	private double px, py, x, y; 
-	private int radius, angle;
+	private int angle; 
+	private double radius;
 	public float timePassed;
 	private Color selfColor;
 	String type;
 	
-	public Particle(String type, double x, double y, int angle, int radius, Color pColor) {
+	public Particle(String type, double x, double y, int angle, double radius, Color pColor) {
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
