@@ -33,14 +33,16 @@ public class Handler {
 	
 		for(int i = 0;i < object.size();i++) {
 			tempObject = object.get(i);
-			
-			// Do not RENDER player when game is PAUSED
-			if(tempObject.getId() == ObjectId.Player) {
-				if(!Game.pauseGame) {
+			if((tempObject.getX() > -Game.cam.getX() -32 && tempObject.getX() < -Game.cam.getX() + Config.WINDOW_WH[0]) &&
+				(tempObject.getY() > -Game.cam.getY() -32 && tempObject.getY() < -Game.cam.getY() + Config.WINDOW_WH[1])) {
+				// Do not RENDER player when game is PAUSED
+				if(tempObject.getId() == ObjectId.Player) {
+					if(!Game.pauseGame) {
+						tempObject.render(g, dt);
+					}
+				} else {
 					tempObject.render(g, dt);
-				}
-			} else {
-				tempObject.render(g, dt);
+				}	
 			}
 		}
 		
