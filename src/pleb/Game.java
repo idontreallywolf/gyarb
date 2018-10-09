@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 
 
@@ -345,10 +346,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	// TODO: ADD in-game speed adjust (timescale)
 	// TODO: ADD particle generation timer
 	// TODO: ADD 
-	
-	private static double timescale = 1.0;
-	private static double fps = 1.0/120.0;
-	private static double ups = 1.0/60.0;
 	private static long lastTime = System.nanoTime();
 	private static double deltaF = 0;
 	private static double deltaU = 0;
@@ -368,14 +365,14 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 			deltaF += (System.nanoTime() - lastTime) / 1000000000.0;
 			deltaU += (System.nanoTime() - lastTime) / 1000000000.0;
 			
-			if (deltaU >= ups) {
-				update((float)((deltaU / ups) * timescale), (float)(deltaU * timescale));
-				deltaU -= ups;
+			if (deltaU >= Config.UPS) {
+				update((float)((deltaU / Config.UPS) * Config.timeScale), (float)(deltaU * Config.timeScale));
+				deltaU -= Config.UPS;
 			}
 			
-			if (deltaF >= fps) {
-				render((float)((deltaF / fps) * timescale), (float)(deltaF * timescale));
-				deltaF -= fps;
+			if (deltaF >= Config.FPS) {
+				render((float)((deltaF / Config.FPS) * Config.timeScale), (float)(deltaF * Config.timeScale));
+				deltaF -= Config.FPS;
 			}
 
 			lastTime = System.nanoTime();
@@ -433,7 +430,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		
 		return dist;
 	}
-
 
 	public static Texture getInstance()
 	{
