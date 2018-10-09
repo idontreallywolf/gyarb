@@ -231,8 +231,6 @@ public class Player extends GameObject {
 
 			} else if (tempObject.getId() == ObjectId.Obstacle) {
 
-				// Spikes/Nails
-				//if(tempObject.getType() == Config.obstacle[0]) {
 				if(tempObject.getId() == ObjectId.Obstacle) {
 					if(getBounds().intersects(tempObject.getBounds())){
 						this.kill();
