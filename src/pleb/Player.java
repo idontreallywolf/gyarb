@@ -301,7 +301,7 @@ public class Player extends GameObject {
 		return new Rectangle(
 				(int)x,
 				(int)(y+height*0.15f),
-				(int)((int)width*0.15f),
+				(int)(width*0.15f),
 				(int)(height-(height*0.3f))
 		);
 	}
@@ -310,7 +310,7 @@ public class Player extends GameObject {
 		return new Rectangle(
 				(int)(x+(width-(width*0.15f))),
 				(int)(y+height*0.15f),
-				(int)((int)width*0.15f),
+				(int)(width*0.15f),
 				(int)(height-(height*0.3f))
 		);
 	}
