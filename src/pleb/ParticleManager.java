@@ -49,19 +49,9 @@ public class ParticleManager {
 		
 		// finally, delete all "remove-marked" objects
 		particles.removeAll(removeParticles);
-		
-		clearTrash();
+		removeParticles.clear();
 	}
 	
-	private void clearTrash() {
-		ListIterator litr = removeParticles.listIterator();
-	      
-	      while(litr.hasNext()) {
-	         Particle particle = (Particle) litr.next();
-	         particle = null;
-	         litr.remove();
-	      }
-	}
 	
 	public void render(Graphics2D g, float dt) {
 		for(Particle p: particles) {
