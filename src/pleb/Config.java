@@ -12,6 +12,7 @@ public class Config {
 	/*
 	 
 	 	TODO: Organize variables
+	 	TODO: Remove unnecessary variables
 	 
 	 */
 	
@@ -35,7 +36,10 @@ public class Config {
 	public static int AmountOfStars 		= 30;
 	public static int maxStarDist 			= 150;
 	public static int coinAmount 			= 0;
-	public static int FPS_RATE 				= 25;
+	
+	public static double timeScale			= 1.0;
+	public static double FPS 				= 1.0/60.0;
+	public static double UPS				= 1.0/40.0;
 	public static int[] WINDOW_WH 			= {810, 510};
 	
 
