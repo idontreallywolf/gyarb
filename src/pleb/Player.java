@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class Player extends GameObject {
 
@@ -90,7 +91,7 @@ public class Player extends GameObject {
 		 which way the bullet is supposed to go
 */
 		handleBullets(this.direction, object, dt, time);
-	}
+}
 
 
 
@@ -190,6 +191,7 @@ public class Player extends GameObject {
 
 		}
 		Bullets.removeAll(removeBullets);
+		removeBullets.clear();
 	}
 
 
