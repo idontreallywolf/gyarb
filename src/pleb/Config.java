@@ -1,7 +1,7 @@
 package pleb;
 
 import java.awt.Color;
-
+import java.awt.GradientPaint;
 import java.io.IOException;
 
 import java.nio.file.Files;
@@ -15,22 +15,27 @@ public class Config {
 	 	TODO: Remove unnecessary variables
 	 
 	 */
+	public static class GameColors {
+		public static Color walkable 		= new Color(255,255,255,128);
+
+	}
 	
 	public static class Colors {
 		/* GameObject Colors */
-		public static Color coin 			= new Color(255, 211, 42);
-		public static Color walkable 		= new Color(5, 196, 107);
-		public static Color obstacle 		= new Color(245, 59, 87);
-		public static Color support 		= new Color(0, 216, 214);
-		public static Color invalid			= new Color(255, 0, 0);
-		public static Color player 			= new Color(30, 39, 46); //new Color(12, 219, 243);
-		public static Color enemy 			= new Color(128, 142, 155);
-		public static Color star			= new Color(255, 255, 255); //new Color(149, 84, 0);
+		public static Color coin 			= new Color(255, 211, 42, 128);
+		public static Color walkable 		= new Color(5, 196, 107, 128);
+		public static Color obstacle 		= new Color(245, 59, 87, 128);
+		public static Color support 		= new Color(0, 216, 214, 128);
+		public static Color invalid			= new Color(255, 0, 0, 128);
+		public static Color player 			= new Color(30, 39, 46, 128); //new Color(12, 219, 243);
+		public static Color enemy 			= new Color(128, 142, 155, 128);
+		public static Color star			= new Color(255, 255, 255, 128); //new Color(149, 84, 0);
 		
 		/* General Colors */
-		public static Color purple 			= new Color(255, 0, 255);
-		public static Color yellow			= new Color(255, 255, 0);
-		public static Color light_blue		= new Color(0, 255, 255);
+		public static Color borderColor		= new Color(255, 255, 255);
+		public static Color purple 			= new Color(255, 0, 255, 128);
+		public static Color yellow			= new Color(255, 255, 0, 128);
+		public static Color light_blue		= new Color(0, 255, 255, 128);
 	}
 	
 	public static int AmountOfStars 		= 30;
@@ -67,7 +72,8 @@ public class Config {
 	public static int particleSize 			= 5;
 	public static int particleSpeed 		= 8;
 	
-	public static Color skyBackground 		= new Color(140, 188, 216);//new Color(35,35,35);
+	//public static Color skyBackground 		= new Color(140, 188, 216);//new Color(35,35,35);
+	public static GradientPaint skyBackground = new GradientPaint(0, 0, new Color(33,39,68), 0, Config.WINDOW_WH[1], new Color(82, 56, 73));
 
 	public static int lvlToLoad 			= 6;
 	public static String tilesetPath 		= "/Tileset_new.png";
