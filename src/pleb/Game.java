@@ -123,7 +123,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 			}
 		}
 		
-		stars.update(time);
+	//	stars.update(time);
 
 	}
 
@@ -138,10 +138,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		}
 
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
-		g.setColor(Config.skyBackground);
+		//g.setColor(Config.skyBackground);
+		g.setPaint(Config.skyBackground);
         g.fillRect(0, 0, getWidth(), getHeight());
         
-        stars.render(g);
+     //   stars.render(g);
         
 		////////////////////////////////////////////////
 		g.translate(cam.getX(), cam.getY()); // cam begin
@@ -219,16 +220,15 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		time = System.nanoTime();
 		
 		
-		stars = new Stars(Config.AmountOfStars);
+	//	stars = new Stars(Config.AmountOfStars);
 
 	}
 
 
 	private boolean compareColors(Color a, Color b) {
-		boolean isSame = true;
 		
 		int[] a_RGB = new int[3];
-		int[] b_RGB = new int[3];
+		int[] b_RGB = new int[4];
 		
 		a_RGB[0] = a.getRed();
 		a_RGB[1] = a.getGreen();
@@ -237,16 +237,16 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		b_RGB[0] = b.getRed();
 		b_RGB[1] = b.getGreen();
 		b_RGB[2] = b.getBlue();
+		b_RGB[3] = b.getAlpha();
 		
 		for(int i = 0;i < 3; i++) {
 			if(a_RGB[i] != b_RGB[i]) {
-				isSame = false;
-				break;
+				return false;
 			}
 			
 		}
 		
-		return isSame;
+		return true;
 	}
 	
 	private void loadImgLevel()
@@ -265,26 +265,33 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 
 				ObjectId objId =  ObjectId.Block;
-
-				if(compareColors(pixelcolor, Config.Colors.walkable) || compareColors(pixelcolor, Config.Colors.invalid))
+				Color inGameColor = new Color(0,0,0,0);
+				
+				if(compareColors(pixelcolor, Config.Colors.walkable) 
+				|| compareColors(pixelcolor, Config.Colors.invalid))
 				{
 					objId = ObjectId.Block;
+					inGameColor = Config.GameColors.walkable;
 				}
 				else if(compareColors(pixelcolor, Config.Colors.obstacle))
 				{
 					objId = ObjectId.Obstacle;
+					inGameColor = Config.Colors.obstacle;
 				}
 				else if(compareColors(pixelcolor, Config.Colors.support))
 				{
 					objId = ObjectId.Trampoline;
+					inGameColor = Config.Colors.support;
 				}
 				else if(compareColors(pixelcolor, Config.Colors.coin))
 				{
 					objId = ObjectId.Coin;
+					inGameColor = Config.Colors.coin;
 					Config.coinAmount++;
 				}
 				else if(compareColors(pixelcolor, Config.Colors.enemy))
 				{
+					inGameColor = Config.Colors.enemy;
 					Enemy e = new Enemy(
 							(float)x*Config.tilesize,
 							(float)y*Config.tilesize,
@@ -292,7 +299,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 							(float)Config.tilesize,
 							ObjectId.Enemy,
 							handler,
-							pixelcolor,
+							inGameColor,
 							//new Color(rgb[0], rgb[1], rgb[2]),
 							true);
 
@@ -302,6 +309,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 				}
 				else if(compareColors(pixelcolor, Config.Colors.player))
 				{
+					inGameColor = Config.Colors.player;
 					player = new Player(
 						(float)x*Config.tilesize,
 						(float)y*Config.tilesize,
@@ -309,7 +317,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 						(float)Config.tilesize,
 						ObjectId.Player,
 						handler,
-						pixelcolor,
+						inGameColor,
 						//new Color(rgb[0], rgb[1], rgb[2]),
 						true);
 
@@ -324,12 +332,13 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 				&& !(compareColors(pixelcolor, Config.Colors.player))
 				&& !(compareColors(pixelcolor, Config.Colors.enemy)))
 				{
+//					inGameColor = Config.GameColors.walkable;
 					handler.addObject( new Block(
 						x*Config.tilesize,
 						y*Config.tilesize,
 						Config.tilesize,
 						Config.tilesize,
-						pixelcolor,//new Color(rgb[0], rgb[1], rgb[2]),
+						inGameColor,//new Color(rgb[0], rgb[1], rgb[2]),
 						objId,
 						handler,
 						false)
