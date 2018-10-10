@@ -52,10 +52,6 @@ public class Player extends GameObject {
 
 		particleMgr = new ParticleManager();
 		bounds = new Rectangle( (int)x, (int)y, (int)width, (int)height );
-
-
-
-
 	}
 
 
