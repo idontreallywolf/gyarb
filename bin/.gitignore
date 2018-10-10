@@ -1,3 +1,7 @@
-git rm -r --cached *.class
-/.gitignore
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
 /pleb/
