@@ -7,6 +7,7 @@ import java.util.LinkedList;
 public class Block extends GameObject {
 	Texture tex = Game.getInstance();
 	private int type;
+	//private Color testColor;
 	
 	Block(float x, float y, float w, float h, Color color, ObjectId id, Handler handler, boolean isEntity){
 		super(x, y, w, h, id, handler, color, isEntity);
@@ -14,6 +15,7 @@ public class Block extends GameObject {
 		setY(y);
 		setWidth(width);
 		setHeight(height);
+		//this.testColor = new Color(255,255,255,128);
 	}
 	
 
@@ -22,10 +24,13 @@ public class Block extends GameObject {
 	}
 	
 	public void render(Graphics2D g, float dt) {
-		if(getX() > -Config.tilesize || getX() < Config.WINDOW_WH[1]+Config.tilesize*32) {
+		//if(getX() > -Config.tilesize || getX() < Config.WINDOW_WH[1]+Config.tilesize*32) {
 			g.setColor(getSelfColor());
-			g.fillRect((int)getX(), (int)getY(), (int)getWidth(), (int)getHeight());	
-		}
+			//g.setColor(this.testColor);
+			g.fillRect((int)getX(), (int)getY(), (int)getWidth(), (int)getHeight());
+			g.setColor(Config.Colors.borderColor);
+			g.drawRect((int)getX(), (int)getY(), (int)getWidth(), (int)getHeight());
+		//}
 		
 		//if(type > 0) g.drawImage(tex.block[type], (int)x, (int)y, null);
 	}
