@@ -3,7 +3,7 @@ package pleb;
 public enum ObjectId { 
 	Player, Block, Obstacle, 
 	Trampoline, BgObject, FgObject, None, 
-	Invalid, Coin, Enemy
+	Invalid, Coin, Enemy, Effect
 }
 
 // player 		— entity which is controlled by user
