@@ -87,11 +87,7 @@ public class Player extends GameObject {
 		 which way the bullet is supposed to go
 */
 		handleBullets(this.direction, object, dt, time);
-}
-
-
-
-
+	}
 
 	public void render(Graphics2D g, float dt) {
 		for(Bullet b: Bullets)
@@ -109,8 +105,6 @@ public class Player extends GameObject {
 		g.draw(getBoundsRight());
 
 		showHP(g);
-
-
 
 	}
 

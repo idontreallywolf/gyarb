@@ -108,11 +108,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	}
 
 
-	/*
+	/**
 	 * @param deltaTime 
 	 * @param time
 	 * 
-	 * */
+	 **/
 	private void update(float deltaTime, float time)
 	{
 		handler.update(keyDownMap, deltaTime, time);
@@ -149,8 +149,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		handler.render(g, deltaTime);
 		g.translate(-cam.getX(), -cam.getY()); // cam end
 		////////////////////////////////////////////////
-
-		//showPlayerHealth(g);
 		drawHud(g);
 
 		g.dispose();
@@ -482,18 +480,15 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		return tex;
 	}
 
-
 	public void keyPressed(KeyEvent e)
 	{
 		keyDownMap.put(e.getKeyCode(), true);
 	}
 
-
 	public void keyReleased(KeyEvent e)
 	{
 		keyDownMap.remove(e.getKeyCode());
 	}
-
 
 	public void keyTyped(KeyEvent e)
 	{
