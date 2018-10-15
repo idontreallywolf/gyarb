@@ -21,6 +21,8 @@ import java.util.Random;
 import java.util.Vector;
 
 
+// TODO: move game objects/effects into new package
+
 
 public class Game extends Canvas implements Runnable, KeyListener, MouseMotionListener {
 
@@ -156,6 +158,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	}
 	
+	// TODO: Add HUD class
 	public static void drawHud(Graphics2D g) {
 		g.setColor(Color.WHITE);
 		g.fillRect(45, 45, Config.tilesize+10, Config.tilesize+10);
