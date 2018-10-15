@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
+import java.util.Vector;
 
 
 
@@ -123,7 +124,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 			}
 		}
 		
-	//	stars.update(time);
+		stars.update(deltaTime);
 
 	}
 
@@ -136,20 +137,17 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 			this.createBufferStrategy(3);
 			return;
 		}
-
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
-		//g.setColor(Config.skyBackground);
 		g.setPaint(Config.skyBackground);
-        g.fillRect(0, 0, getWidth(), getHeight());
-        
-     //   stars.render(g);
-        
+		g.fillRect(0, 0, Config.WINDOW_WH[0], Config.WINDOW_WH[1]);
+		 
+		stars.render(g, deltaTime);
 		////////////////////////////////////////////////
 		g.translate(cam.getX(), cam.getY()); // cam begin
 		handler.render(g, deltaTime);
 		g.translate(-cam.getX(), -cam.getY()); // cam end
-
 		////////////////////////////////////////////////
+
 		//showPlayerHealth(g);
 		drawHud(g);
 
@@ -220,7 +218,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		time = System.nanoTime();
 		
 		
-	//	stars = new Stars(Config.AmountOfStars);
+		stars = new Stars(Config.AmountOfStars);
 
 	}
 
@@ -437,6 +435,45 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 				Math.pow((a.getY() - b.getY()), 2)
 		);
 		
+		return dist;
+	}
+	
+	public static double getObjectDistance(GameEffect a, GameEffect b) {
+		double dist = Math.sqrt(
+				Math.pow((a.getX() - b.getX()), 2) + 
+				Math.pow((a.getY() - b.getY()), 2)
+		);
+		
+		return dist;
+	}
+	
+	public static double getVectorDistance(Vector<Float> a, Vector<Float> b) {
+		double dist = Math.sqrt(
+				Math.pow((a.get(0) - b.get(0)), 2) + 
+				Math.pow((a.get(1) - b.get(1)), 2)
+		);
+		return dist;
+	}
+	
+	public static double getDistance(float x1, float y1, float x2, float y2) {
+		double dist = Math.sqrt(
+				Math.pow((x1 - x2), 2) + 
+				Math.pow((y1 - y2), 2)
+		);
+		return dist;
+	}
+	public static double getDistance(int x1, int y1, int x2, int y2) {
+		double dist = Math.sqrt(
+				Math.pow((x1 - x2), 2) + 
+				Math.pow((y1 - y2), 2)
+		);
+		return dist;
+	}
+	public static double getDistance(double x1, double y1, double x2, double y2) {
+		double dist = Math.sqrt(
+				Math.pow((x1 - x2), 2) + 
+				Math.pow((y1 - y2), 2)
+		);
 		return dist;
 	}
 
