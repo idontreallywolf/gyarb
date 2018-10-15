@@ -31,7 +31,7 @@ public class Hud {
 		Buttons.add(new Button(10, 	10, 100, 40, "Save", 	10, new Color(255,126,126), new Color(255,78,78),Color.WHITE));
 		Buttons.add(new Button(115, 10, 100, 40, "Pause", 	10, new Color(255,126,126), new Color(255,78,78),Color.WHITE));
 		Buttons.add(new Button(220, 10, 100, 40, "Quit", 	10, new Color(255,126,126), new Color(255,78,78),Color.WHITE));
-		Buttons.add(new Button(Config.WINDOW_WH[0]-110, 10, 100, 40, "Settings", 10, new Color(255,126,126), new Color(255,78,78),Color.WHITE));
+		Buttons.add(new Button(Config.General.WINDOW_WH[0]-110, 10, 100, 40, "Settings", 10, new Color(255,126,126), new Color(255,78,78),Color.WHITE));
 		
 		hudPanel.add(J_list);
 		

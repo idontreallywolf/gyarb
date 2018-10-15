@@ -32,8 +32,8 @@ public class Enemy extends GameObject {
 				Math.pow((Game.getPlayerX() - getX()), 2) + 
 				Math.pow((Game.getPlayerY() - getY()), 2)
 		);
-		if(dist <= Config.EnemyVision) {				
-			if((System.currentTimeMillis() - lastBullet >= Config.bulletDelay) && (Bullets.size() < Config.BulletLimit)) {
+		if(dist <= Config.Entity.Enemy.vision) {				
+			if((System.currentTimeMillis() - lastBullet >= Config.Bullet.delay) && (Bullets.size() < Config.Bullet.limit)) {
 				Bullets.add( new Bullet(
 					getX()+(getWidth()/2), 
 					getY()+(getHeight()/2-(getHeight()/4)), 
@@ -80,7 +80,7 @@ public class Enemy extends GameObject {
 			b.update(object, dt, time);
 			if(b.collided) {
 				removeBullets.add(b);
-				particleMgr.genParticle("explosion", (int)b.getX(), (int)b.getY(), 30, Config.particleSpeed*1, Config.Colors.purple);
+				particleMgr.genParticle("explosion", (int)b.getX(), (int)b.getY(), 30, Config.Particle.speed*1, Config.Colors.purple);
 			}
 			
 		}

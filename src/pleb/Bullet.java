@@ -11,16 +11,16 @@ public class Bullet extends GameObject {
 	private double originX, originY, targetX, targetY;
 	
 	public Bullet(float x, float y, ObjectId id, Handler handler, double tX, double tY) {
-		super(x, y, Config.bulletSize, Config.bulletSize, id, handler, new Color(255,0,255), false);
+		super(x, y, Config.Bullet.size, Config.Bullet.size, id, handler, new Color(255,0,255), false);
 		setX(x);
 		setY(y);
-		setWidth(Config.bulletSize);
-		setHeight(Config.bulletSize);
+		setWidth(Config.Bullet.size);
+		setHeight(Config.Bullet.size);
 		this.handler = handler;
 		this.originX = getX();
 		this.originY = getY();
-		this.targetX = tX;//Game.getPlayerX();
-		this.targetY = tY;//Game.getPlayerY();
+		this.targetX = tX;
+		this.targetY = tY;
 		
 	}
 	
@@ -29,18 +29,18 @@ public class Bullet extends GameObject {
 		double angle;
 
 		angle = Math.atan2(
-				(this.targetX+Config.tilesize/2-(getWidth()/2))-this.originX, 
-				(this.targetY+Config.tilesize/2-(getHeight()/2))-this.originY
+				(this.targetX+Config.General.tilesize/2-(getWidth()/2))-this.originX, 
+				(this.targetY+Config.General.tilesize/2-(getHeight()/2))-this.originY
 		);
 	
-		setX(getX()+(float)(Math.sin(angle))*Config.BulletSpeed);
-		setY(getY()+(float)(Math.cos(angle))*Config.BulletSpeed);
+		setX(getX()+(float)(Math.sin(angle))*Config.Bullet.speed);
+		setY(getY()+(float)(Math.cos(angle))*Config.Bullet.speed);
 	
 		
 		checkCollision(object);
 	
-		if(getX() > this.originX+Config.bulletDestroyDist
-		|| getY() > this.originY+Config.bulletDestroyDist) {
+		if(getX() > this.originX+Config.Bullet.destroyDist
+		|| getY() > this.originY+Config.Bullet.destroyDist) {
 			collided = true;
 		}
 		

@@ -13,7 +13,7 @@ public class Texture {
 		
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
-			block_sheet = loader.loadImage(Config.tilesetPath);
+			block_sheet = loader.loadImage(Config.General.tilesetPath);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

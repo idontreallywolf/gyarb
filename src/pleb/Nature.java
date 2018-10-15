@@ -18,7 +18,7 @@ public class Nature {
 	 */
 	public Nature(String event) {
 		
-		wp = new WeatherParticle(Config.WINDOW_WH[0]/2, 0, 5, 5, ObjectId.FgObject, new Color(255,255,255), false, event);
+		wp = new WeatherParticle(Config.General.WINDOW_WH[0]/2, 0, 5, 5, ObjectId.FgObject, new Color(255,255,255), false, event);
 		//Game.handler.addObject(wp);
 		
 		
@@ -68,7 +68,7 @@ public class Nature {
 			g.setColor(getSelfColor());
 			for(int i = 0; i < 10; i++) 
 			{
-				g.fillOval(Game.getRandInt(1, Config.WINDOW_WH[0]), Game.getRandInt(1, Config.WINDOW_WH[1]), (int)getWidth(), (int)getHeight());
+				g.fillOval(Game.getRandInt(1, Config.General.WINDOW_WH[0]), Game.getRandInt(1, Config.General.WINDOW_WH[1]), (int)getWidth(), (int)getHeight());
 			}
 			
 		}

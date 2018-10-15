@@ -51,7 +51,7 @@ public class GameFrame extends JFrame {
 	
 	private void gamePanelInit(Game game) {
 		this.game = game;
-		this.game.setSize(Config.WINDOW_WH[0], Config.WINDOW_WH[1]);
+		this.game.setSize(Config.General.WINDOW_WH[0], Config.General.WINDOW_WH[1]);
 		
 		panelGame = new JPanel();
 		panelGame.add(this.game);
@@ -71,7 +71,7 @@ public class GameFrame extends JFrame {
 		for(int i = 0;i < Btns_PanelMain.size();i++)
 			panelMainHud.add(Btns_PanelMain.get(i));
 
-		panelMain.setPreferredSize(new Dimension(Config.WINDOW_WH[0], Config.WINDOW_WH[1]));
+		panelMain.setPreferredSize(new Dimension(Config.General.WINDOW_WH[0], Config.General.WINDOW_WH[1]));
 		panelMain.setLayout(new BorderLayout(0, 0));
 		panelMain.add(panelMainHud, BorderLayout.NORTH);
 		panelMain.add(panelGame, BorderLayout.SOUTH);
@@ -90,10 +90,9 @@ public class GameFrame extends JFrame {
 		for(int i = 0;i < Btns_PanelPause.size();i++)
 			panelPauseHud.add(Btns_PanelPause.get(i));
 		
-		panelPause.setPreferredSize(new Dimension(Config.WINDOW_WH[0], Config.WINDOW_WH[1]));
+		panelPause.setPreferredSize(new Dimension(Config.General.WINDOW_WH[0], Config.General.WINDOW_WH[1]));
 		panelPause.setLayout(new BorderLayout(0, 0));
 		panelPause.add(panelPauseHud, BorderLayout.NORTH);
-		//panelPause.add(panelGame, BorderLayout.SOUTH);
 		
 	}
 	

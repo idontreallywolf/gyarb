@@ -10,8 +10,8 @@ public class Camera {
 	
 	
 	public void update(GameObject player) {
-		int targetX = (int) (-player.getX() + Config.WINDOW_WH[0] / 2 + 16);
-		int targetY = (int) (-player.getY() + Config.WINDOW_WH[1] / 2 + 64);
+		int targetX = (int) (-player.getX() + Config.General.WINDOW_WH[0] / 2 + 16);
+		int targetY = (int) (-player.getY() + Config.General.WINDOW_WH[1] / 2 + 64);
 		x += (targetX - x) * 0.1;
 		y += (targetY - y) * 0.1;
 	}

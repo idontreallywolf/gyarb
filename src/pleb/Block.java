@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 
 public class Block extends GameObject {
-	Texture tex = Game.getInstance();
+	//Texture tex = Game.getInstance();
 	private int type;
 	//private Color testColor;
 	
@@ -24,7 +24,7 @@ public class Block extends GameObject {
 	}
 	
 	public void render(Graphics2D g, float dt) {
-		//if(getX() > -Config.tilesize || getX() < Config.WINDOW_WH[1]+Config.tilesize*32) {
+		//if(getX() > -Config.General.tilesize || getX() < Config.WINDOW_WH[1]+Config.General.tilesize*32) {
 			g.setColor(getSelfColor());
 			//g.setColor(this.testColor);
 			g.fillRect((int)getX(), (int)getY(), (int)getWidth(), (int)getHeight());
@@ -38,12 +38,12 @@ public class Block extends GameObject {
 	public int getType() { return this.type; }
 	
 	public Rectangle getBounds() {
-		if(type == Config.obstacle[0])
+		if(type == Config.General.obstacle[0])
 			return new Rectangle(
-					(int)(x+Config.tilesize*0.1), 
-					(int)(y+Config.tilesize-(Config.tilesize*0.2)), 
-					(int)(Config.tilesize-(Config.tilesize*0.1)), 
-					(int)(Config.tilesize*0.2)
+					(int)(x+Config.General.tilesize*0.1), 
+					(int)(y+Config.General.tilesize-(Config.General.tilesize*0.2)), 
+					(int)(Config.General.tilesize-(Config.General.tilesize*0.1)), 
+					(int)(Config.General.tilesize*0.2)
 			);
 		
 		return new Rectangle((int)x, (int)y, 32, 32);

@@ -30,7 +30,7 @@ public class Player extends GameObject {
 	public static int maxHP = 150;
 
 
-	Texture tex = Game.getInstance();
+	//Texture tex = Game.getInstance();
 
 	Player(float x, float y, float w, float h, ObjectId id, Handler obj_handler, Color color, boolean isEntity){
 		super(x, y, w, h, id, obj_handler, color, isEntity);
@@ -39,7 +39,7 @@ public class Player extends GameObject {
 		setY(y);
 		setWidth(w);
 		setHeight(h);
-		setHP(Config.playerHealth);
+		setHP(Config.Entity.Player.health);
 
 		coins_collected = 0;
 		lastBullet = 0;
@@ -75,7 +75,7 @@ public class Player extends GameObject {
 			timeElapsed += time;
 			if (timeElapsed >= 0.01 ) {
 				timeElapsed = 0;
-				particleMgr.genParticle("tail",(int)getX(), (int)getY(), 10, Config.particleSpeed*2, Config.Colors.purple);
+				particleMgr.genParticle("tail",(int)getX(), (int)getY(), 10, Config.Particle.speed*2, Config.Colors.purple);
 			}
 		}
 
@@ -120,9 +120,9 @@ public class Player extends GameObject {
 		{
 			for(GameObject e: Handler.entities)
 			{
-				if(Game.getObjectDistance(this, e) <= Config.EnemyVision)
+				if(Game.getObjectDistance(this, e) <= Config.Entity.Enemy.vision)
 				{
-					if((System.currentTimeMillis() - lastBullet >= bulletDelay) && (Bullets.size() < Config.BulletLimit))
+					if((System.currentTimeMillis() - lastBullet >= bulletDelay) && (Bullets.size() < Config.Bullet.limit))
 					{
 						Bullets.add( new Bullet(
 							getX()+(getWidth()/2),
@@ -182,7 +182,7 @@ public class Player extends GameObject {
 			b.update(object, dt, time);
 			if(b.collided) {
 				removeBullets.add(b);
-				particleMgr.genParticle("explosion",(int)b.getX(), (int)b.getY(), 30, Config.particleSpeed*1, Config.Colors.purple);
+				particleMgr.genParticle("explosion",(int)b.getX(), (int)b.getY(), 30, Config.Particle.speed*1, Config.Colors.purple);
 			}
 
 		}
@@ -249,7 +249,7 @@ public class Player extends GameObject {
 				if(getBounds().intersects(tempObject.getBounds())) {
 					coins_collected++;
 					object.remove(tempObject);
-					particleMgr.genParticle("tail",(int)getX(), (int)getY(), 10, Config.particleSpeed*2, Config.Colors.yellow);
+					particleMgr.genParticle("tail",(int)getX(), (int)getY(), 10, Config.Particle.speed*2, Config.Colors.yellow);
 				}
 			}
 		}

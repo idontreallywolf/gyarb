@@ -42,7 +42,7 @@ public class ParticleManager {
 			
 			// Append outdated particles to removeParticles
 			// if time limit has passed
-			if(p.timePassed >= Config.particleLife) {
+			if(p.timePassed >= Config.Particle.lifeTime) {
 				removeParticles.add(p);
 			}
 		}
@@ -93,7 +93,7 @@ class Particle {
 		g.setColor(this.selfColor);
 		
 		g.fillOval(
-				(this.type == "tail" ? (int)(px+Config.tilesize/2):(int)px), 
-				(this.type == "tail" ? (int)(py+Config.tilesize/2):(int)py), 5, 5); 
+				(this.type == "tail" ? (int)(px+Config.General.tilesize/2):(int)px), 
+				(this.type == "tail" ? (int)(py+Config.General.tilesize/2):(int)py), 5, 5); 
 	}
 }

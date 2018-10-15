@@ -21,9 +21,9 @@ public class Stars {
 		starLayer3 = new ArrayList<Star>();
 		
 		for(int i = 0; i < amount; i++) {
-			starLayer1.add(new Star(Math.random() * Config.WINDOW_WH[0], Math.random() * Config.WINDOW_WH[1], 5, 5, Color.WHITE, 3));
-			starLayer2.add(new Star(Math.random() * Config.WINDOW_WH[0], Math.random() * Config.WINDOW_WH[1], 5, 5, new Color(237, 237, 237), 4));
-			starLayer3.add(new Star(Math.random() * Config.WINDOW_WH[0], Math.random() * Config.WINDOW_WH[1], 5, 5, new Color(198, 198, 198), 6));
+			starLayer1.add(new Star(Math.random() * Config.General.WINDOW_WH[0], Math.random() * Config.General.WINDOW_WH[1], 5, 5, Color.WHITE, 3));
+			starLayer2.add(new Star(Math.random() * Config.General.WINDOW_WH[0], Math.random() * Config.General.WINDOW_WH[1], 5, 5, new Color(237, 237, 237), 4));
+			starLayer3.add(new Star(Math.random() * Config.General.WINDOW_WH[0], Math.random() * Config.General.WINDOW_WH[1], 5, 5, new Color(198, 198, 198), 6));
 		}
 	}
 	

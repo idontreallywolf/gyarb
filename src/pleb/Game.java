@@ -104,7 +104,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	 */
 	public static void main(String[] args)
 	{
-		gameFrame = new GameFrame(Config.WINDOW_WH[0], Config.WINDOW_WH[1], "Pleb Title", new Game());
+		gameFrame = new GameFrame(Config.General.WINDOW_WH[0], Config.General.WINDOW_WH[1], "Pleb Title", new Game());
 	}
 
 
@@ -140,8 +140,8 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 			return;
 		}
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
-		g.setPaint(Config.skyBackground);
-		g.fillRect(0, 0, Config.WINDOW_WH[0], Config.WINDOW_WH[1]);
+		g.setPaint(Config.General.skyBackground);
+		g.fillRect(0, 0, Config.General.WINDOW_WH[0], Config.General.WINDOW_WH[1]);
 		 
 		stars.render(g, deltaTime);
 		////////////////////////////////////////////////
@@ -161,16 +161,16 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	// TODO: Add HUD class
 	public static void drawHud(Graphics2D g) {
 		g.setColor(Color.WHITE);
-		g.fillRect(45, 45, Config.tilesize+10, Config.tilesize+10);
+		g.fillRect(45, 45, Config.General.tilesize+10, Config.General.tilesize+10);
 		g.setColor(Config.Colors.coin);
-		g.fillRect(50, 50, Config.tilesize, Config.tilesize);
+		g.fillRect(50, 50, Config.General.tilesize, Config.General.tilesize);
 		
 		g.setColor(Color.WHITE);
 		g.setFont(txtFont);
 	
 		FontMetrics metrics = g.getFontMetrics(txtFont);
-	    int x = 50 + (Config.tilesize - metrics.stringWidth(Integer.toString(player.getCoinsCollected()))) / 2;
-	    int y = 50 + ((Config.tilesize - metrics.getHeight()) / 2) + metrics.getAscent();
+	    int x = 50 + (Config.General.tilesize - metrics.stringWidth(Integer.toString(player.getCoinsCollected()))) / 2;
+	    int y = 50 + ((Config.General.tilesize - metrics.getHeight()) / 2) + metrics.getAscent();
 		
 		g.drawString(Integer.toString(player.getCoinsCollected()), x, y);
 	}
@@ -221,7 +221,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		time = System.nanoTime();
 		
 		
-		stars = new Stars(Config.AmountOfStars);
+		stars = new Stars(Config.General.AmountOfStars);
 
 	}
 
@@ -272,7 +272,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 				|| compareColors(pixelcolor, Config.Colors.invalid))
 				{
 					objId = ObjectId.Block;
-					inGameColor = Config.GameColors.walkable;
+					inGameColor = Config.Colors.walkable_trsp;
 				}
 				else if(compareColors(pixelcolor, Config.Colors.obstacle))
 				{
@@ -288,20 +288,19 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 				{
 					objId = ObjectId.Coin;
 					inGameColor = Config.Colors.coin;
-					Config.coinAmount++;
+					Config.General.coinAmount++;
 				}
 				else if(compareColors(pixelcolor, Config.Colors.enemy))
 				{
 					inGameColor = Config.Colors.enemy;
 					Enemy e = new Enemy(
-							(float)x*Config.tilesize,
-							(float)y*Config.tilesize,
-							(float)Config.tilesize,
-							(float)Config.tilesize,
+							(float)x*Config.General.tilesize,
+							(float)y*Config.General.tilesize,
+							(float)Config.General.tilesize,
+							(float)Config.General.tilesize,
 							ObjectId.Enemy,
 							handler,
 							inGameColor,
-							//new Color(rgb[0], rgb[1], rgb[2]),
 							true);
 
 						handler.addObject(e);
@@ -312,14 +311,13 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 				{
 					inGameColor = Config.Colors.player;
 					player = new Player(
-						(float)x*Config.tilesize,
-						(float)y*Config.tilesize,
-						(float)Config.tilesize,
-						(float)Config.tilesize,
+						(float)x*Config.General.tilesize,
+						(float)y*Config.General.tilesize,
+						(float)Config.General.tilesize,
+						(float)Config.General.tilesize,
 						ObjectId.Player,
 						handler,
 						inGameColor,
-						//new Color(rgb[0], rgb[1], rgb[2]),
 						true);
 
 					handler.addObject(player);
@@ -333,13 +331,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 				&& !(compareColors(pixelcolor, Config.Colors.player))
 				&& !(compareColors(pixelcolor, Config.Colors.enemy)))
 				{
-//					inGameColor = Config.GameColors.walkable;
 					handler.addObject( new Block(
-						x*Config.tilesize,
-						y*Config.tilesize,
-						Config.tilesize,
-						Config.tilesize,
-						inGameColor,//new Color(rgb[0], rgb[1], rgb[2]),
+						x*Config.General.tilesize,
+						y*Config.General.tilesize,
+						Config.General.tilesize,
+						Config.General.tilesize,
+						inGameColor,
 						objId,
 						handler,
 						false)
@@ -348,7 +345,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 			}
 		}
 
-		System.out.println("Amount of coins: "+Config.coinAmount);
+		System.out.println("Amount of coins: "+Config.General.coinAmount);
 
 
 	}
@@ -375,14 +372,14 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 			deltaF += (System.nanoTime() - lastTime) / 1000000000.0;
 			deltaU += (System.nanoTime() - lastTime) / 1000000000.0;
 			
-			if (deltaU >= Config.UPS) {
-				update((float)((deltaU / Config.UPS) * Config.timeScale), (float)(deltaU * Config.timeScale));
-				deltaU -= Config.UPS;
+			if (deltaU >= Config.General.UPS) {
+				update((float)((deltaU / Config.General.UPS) * Config.General.timeScale), (float)(deltaU * Config.General.timeScale));
+				deltaU -= Config.General.UPS;
 			}
 			
-			if (deltaF >= Config.FPS) {
-				render((float)((deltaF / Config.FPS) * Config.timeScale), (float)(deltaF * Config.timeScale));
-				deltaF -= Config.FPS;
+			if (deltaF >= Config.General.FPS) {
+				render((float)((deltaF / Config.General.FPS) * Config.General.timeScale), (float)(deltaF * Config.General.timeScale));
+				deltaF -= Config.General.FPS;
 			}
 
 			lastTime = System.nanoTime();

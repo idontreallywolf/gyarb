@@ -33,8 +33,8 @@ public class Handler {
 	
 		for(int i = 0;i < object.size();i++) {
 			tempObject = object.get(i);
-			if((tempObject.getX() > -Game.cam.getX() -Config.tilesize && tempObject.getX() < -Game.cam.getX() + Config.WINDOW_WH[0]) &&
-				(tempObject.getY() > -Game.cam.getY() -Config.tilesize && tempObject.getY() < -Game.cam.getY() + Config.WINDOW_WH[1])) {
+			if((tempObject.getX() > -Game.cam.getX() -Config.General.tilesize && tempObject.getX() < -Game.cam.getX() + Config.General.WINDOW_WH[0]) &&
+				(tempObject.getY() > -Game.cam.getY() -Config.General.tilesize && tempObject.getY() < -Game.cam.getY() + Config.General.WINDOW_WH[1])) {
 				// Do not RENDER player when game is PAUSED
 				if(tempObject.getId() == ObjectId.Player) {
 					if(!Game.pauseGame) {
