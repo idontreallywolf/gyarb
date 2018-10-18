@@ -8,22 +8,31 @@ import java.util.LinkedList;
 // TODO : ADD method docs
 
 public abstract class GameObject {
-	
+
 	protected ObjectId id;
 	protected Color selfColor;
-	
+
 	protected float x, y, initialX, initialY;
 	protected float width, height;
 	protected float velX = 0, velY = 0;
 	protected float acc;
 	protected float previousHealth, currentHealth;
-	
+
 	protected boolean isOnScreen;
 	protected boolean isEntity;
 	protected boolean showTargetBorder;
 	protected boolean falling = true;
 	protected boolean jumping = false;
-	
+
+	/**
+		@param x 			- x Position of object
+		@param y 			- y Position of object
+		@param w 			- width of object
+		@param h 			- height of object
+		@param id 			- ObjectId._ObjName_
+		@param selfColor 	- Object color
+		@param isEntity 	- boolean value true/false
+	**/
 	public GameObject(float x, float y, float w, float h, ObjectId id, Color selfColor, boolean isEntity){
 		this.x = initialX = x;
 		this.y = initialY = y;
@@ -32,17 +41,22 @@ public abstract class GameObject {
 		this.id = id;
 		this.selfColor = selfColor;
 		this.isEntity = isEntity;
+
+		// Show border will only be used if the object is an entity
 		if(isEntity) {
 			showTargetBorder = false;
 		}
+
+		// isOnScreen is used to determine wether or not the object is visible to player
+		// and it will only be rendered if it is visible, meaning it's on screen
 		this.isOnScreen = true;
 	}
-	
+
 	public abstract void update(LinkedList<GameObject> object, float dt, float time);
 	public abstract void render(Graphics2D g, float dt);
-	
-	
-	// set
+
+
+	// setters
 	public void setColor(Color c) 				{	this.selfColor = c;				}
 	public void setX(float x) 					{	this.x = x;						}
 	public void setY(float y) 					{	this.y = y;						}
@@ -54,64 +68,63 @@ public abstract class GameObject {
 	public void setJumping(boolean jumping) 	{	this.jumping = jumping;			}
 	public void setCurrentHealth(float amount) 	{	this.currentHealth = amount;	}
 	public void setPreviousHealth(float amount) {	this.previousHealth = amount; 	}
-	
-	public void setHP(int amount) 
+
+	public void setHP(int amount)
 	{
 		setCurrentHealth(amount);
 		setPreviousHealth(amount);
 	}
-	
-	public void showHP(Graphics2D g) 
+
+	public void showHP(Graphics2D g)
 	{
 		float posX = getX()-10;
 		float posY = getY()-15;
-		
+
 		g.setColor(Color.WHITE);
 		g.fillRect((int)posX, (int)posY, 50, 10);
 
 		float percentage = (getCurrentHealth() * 50 / getPreviousHealth());
-		
-		g.setColor(Color.RED);		
-		g.fillRect((int)posX, (int)posY, (int)(50-(50-percentage)), 10);		
+
+		g.setColor(Color.RED);
+		g.fillRect((int)posX, (int)posY, (int)(50-(50-percentage)), 10);
 	}
-	
-	public void showTargetBorder(boolean show) 
+
+	public void showTargetBorder(boolean show)
 	{
 		this.showTargetBorder = true;
 	}
-	
-	
-	// get
+
+
+	// getters
 	public abstract Rectangle getBounds();
 	public abstract Rectangle getBoundsTop();
 	public abstract Rectangle getBoundsBottom();
 	public abstract Rectangle getBoundsLeft();
 	public abstract Rectangle getBoundsRight();
-	
-	
+
+
 	public float getX() 		{	return x;		}
 	public float getY() 		{	return y;		}
 	public float getVelX() 		{	return velX;	}
 	public float getVelY() 		{	return velY;	}
-	public float getWidth() 	{	return width;	}
-	public float getHeight()	{	return height;	}
-	public ObjectId getId() 	{	return id;		}
-	
-	public Color getSelfColor() {	return this.selfColor;	}
-	public boolean isEntity() 	{ 	return this.isEntity; 	}
-	public boolean isFalling() 	{ 	return this.falling; 	}
-	public boolean isJumping() 	{ 	return this.jumping; 	}
-	public boolean isTarget() 	{ 	return this.showTargetBorder; 	}
+	public float getWidth() 		{	return width;	}
+	public float getHeight()		{	return height;	}
+	public ObjectId getId() 		{	return id;	}
 
-	
+	public Color getSelfColor() 	{	return this.selfColor;		}
+	public boolean isEntity() 	{ 	return this.isEntity; 		}
+	public boolean isFalling() 	{ 	return this.falling; 		}
+	public boolean isJumping() 	{ 	return this.jumping; 		}
+	public boolean isTarget() 	{ 	return this.showTargetBorder; }
+
+
 	public float getCurrentHealth() 	{ 	return currentHealth; 	}
 	public float getPreviousHealth() 	{ 	return previousHealth; 	}
-	
-	public int getType() 	{ 	return 0; 	}
+
+	public int getType() { return 0; }
 
 
-	
 
-	
+
+
 }
-
