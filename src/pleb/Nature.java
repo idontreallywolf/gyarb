@@ -54,7 +54,7 @@ public class Nature {
 	/** Private Classes **/
 	private class WeatherParticle extends GameObject {
 		public WeatherParticle(float x, float y, int w, int h, ObjectId id,  Color selfColor, boolean isEntity, String type) {
-			super(x, y, w, h, id, Game.handler, selfColor, isEntity);
+			super(x, y, w, h, id, selfColor, isEntity);
 		}
 
 		public void update(LinkedList<GameObject> object, float dt, float time) 

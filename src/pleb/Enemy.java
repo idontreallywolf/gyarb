@@ -16,9 +16,9 @@ public class Enemy extends GameObject {
 	private ArrayList<Bullet> Bullets = new ArrayList<Bullet>();
 	private ArrayList<Bullet> removeBullets = new ArrayList<Bullet>();
 	
-	public Enemy(float x, float y, float w, float h, ObjectId id, Handler handler, Color selfColor, boolean isEntity) 
+	public Enemy(float x, float y, float w, float h, ObjectId id, Color selfColor, boolean isEntity) 
 	{
-		super(x, y, w, h, id, handler, selfColor, isEntity);
+		super(x, y, w, h, id, selfColor, isEntity);
 		dist = 0;
 		lastBullet = 0;
 		setHP(50);
@@ -37,7 +37,7 @@ public class Enemy extends GameObject {
 				Bullets.add( new Bullet(
 					getX()+(getWidth()/2), 
 					getY()+(getHeight()/2-(getHeight()/4)), 
-					getId(), handler, Game.getPlayerX(), Game.getPlayerY()
+					getId(), Game.getPlayerX(), Game.getPlayerY()
 				) );
 				lastBullet = System.currentTimeMillis();
 			}

@@ -15,6 +15,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
@@ -36,6 +37,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	public static Point mousePos;
 	public static GameFrame gameFrame;
+	
+	public static LinkedList<GameObject> objects = new LinkedList<GameObject>();
+	public static LinkedList<GameObject> entities = new LinkedList<GameObject>();
 	
 	/*
 	 *	when specific keys are pressed, their key_codes are stored in a hashMap 
@@ -83,7 +87,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	 *  and render method of GameObject(s)
 	 * 
 	 */
-	public static Handler handler;
+	public Handler handler;
 	
 	/*
 	 *	Camera object translates any GameObject 
@@ -99,6 +103,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	 */
 	Nature nature;
 
+	
 	/*
 	 *	Main class method 
 	 */
@@ -118,11 +123,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		handler.update(keyDownMap, deltaTime, time);
 		gameFrame.update();
 		
-		for(int i = 0; i < handler.object.size(); i++)
+		for(int i = 0; i < objects.size(); i++)
 		{
-			if(handler.object.get(i).getId() == ObjectId.Player)
+			if(objects.get(i).getId() == ObjectId.Player)
 			{
-				cam.update(handler.object.get(i));
+				cam.update(objects.get(i));
 			}
 		}
 		
@@ -218,6 +223,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		
 		time = System.nanoTime();
 		
+		handler = new Handler();
 		
 		stars = new Stars(Config.General.AmountOfStars);
 
@@ -297,12 +303,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 							(float)Config.General.tilesize,
 							(float)Config.General.tilesize,
 							ObjectId.Enemy,
-							handler,
 							inGameColor,
 							true);
 
-						handler.addObject(e);
-						Handler.entities.add(e);
+						objects.add(e);
+						entities.add(e);
 
 				}
 				else if(compareColors(pixelcolor, Config.Colors.player))
@@ -314,11 +319,10 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 						(float)Config.General.tilesize,
 						(float)Config.General.tilesize,
 						ObjectId.Player,
-						handler,
 						inGameColor,
 						true);
 
-					handler.addObject(player);
+					objects.add(player);
 				}
 				else
 				{
@@ -329,14 +333,13 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 				&& !(compareColors(pixelcolor, Config.Colors.player))
 				&& !(compareColors(pixelcolor, Config.Colors.enemy)))
 				{
-					handler.addObject( new Block(
+					objects.add( new Block(
 						x*Config.General.tilesize,
 						y*Config.General.tilesize,
 						Config.General.tilesize,
 						Config.General.tilesize,
 						inGameColor,
 						objId,
-						handler,
 						false)
 					);
 				}
@@ -387,6 +390,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		}
 
 	}
+
 
 	public static Color getColor(float p)
 	{

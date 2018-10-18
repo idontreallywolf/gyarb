@@ -5,38 +5,52 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Handler {
-	public LinkedList<GameObject> object = new LinkedList<GameObject>();
-	public static LinkedList<GameObject> entities = new LinkedList<GameObject>();
-	private GameObject tempObject;
+	// public static LinkedList<GameObject> object = new LinkedList<GameObject>();
+	// public static LinkedList<GameObject> entities = new LinkedList<GameObject>();
+	private static GameObject tempObject;
 
+	public Handler() {
+		
+	}
+	
 	public void update(HashMap<Integer, Boolean> keyDownMap, float dt, float time) {
 			
-		for(int i = 0;i < object.size();i++) {
-			tempObject = object.get(i);
+		for(int i = 0;i < Game.objects.size();i++) {
+			tempObject = Game.objects.get(i);
 			
 			if(tempObject.isEntity() && tempObject.getId() == ObjectId.Enemy && tempObject.getCurrentHealth() <= 0) {
-				object.remove(tempObject);
+				Game.objects.remove(tempObject);
 			}
 			
-			// Do not UPDATE player when game is PAUSED
 			if(tempObject.getId() == ObjectId.Player) {
+				// Do not UPDATE player when game is PAUSED
 				if(!Game.pauseGame) {
-					tempObject.update(object, dt, time);
+					tempObject.isOnScreen = true;
+					tempObject.update(Game.objects, dt, time);
 				}
 			} else {
-				tempObject.update(object, dt, time);
+				if((tempObject.getX() > -Game.cam.getX() -Config.General.tilesize && tempObject.getX() < -Game.cam.getX() + Config.General.WINDOW_WH[0]) &&
+				(tempObject.getY() > -Game.cam.getY() -Config.General.tilesize && tempObject.getY() < -Game.cam.getY() + Config.General.WINDOW_WH[1])) {
+					tempObject.isOnScreen = true;
+					tempObject.update(Game.objects, dt, time);
+				} else {
+					tempObject.isOnScreen = false;
+					tempObject.update(Game.objects, dt, time);
+				}
+
 			}
 		}
 	}
 	
 	public void render(Graphics2D g, float dt) {
 	
-		for(int i = 0;i < object.size();i++) {
-			tempObject = object.get(i);
+		for(int i = 0;i < Game.objects.size();i++) {
+			tempObject = Game.objects.get(i);
 			if((tempObject.getX() > -Game.cam.getX() -Config.General.tilesize && tempObject.getX() < -Game.cam.getX() + Config.General.WINDOW_WH[0]) &&
 				(tempObject.getY() > -Game.cam.getY() -Config.General.tilesize && tempObject.getY() < -Game.cam.getY() + Config.General.WINDOW_WH[1])) {
-				// Do not RENDER player when game is PAUSED
+
 				if(tempObject.getId() == ObjectId.Player) {
+					// Do not RENDER player when game is PAUSED
 					if(!Game.pauseGame) {
 						tempObject.render(g, dt);
 					}
@@ -49,10 +63,10 @@ public class Handler {
 	}
 	
 	public void addObject(GameObject object) {
-		this.object.add(object);
+		Game.objects.add(object);
 	}
 	public void removeObject(GameObject object) {
-		this.object.remove(object);
+		Game.objects.remove(object);
 	}
 	
 	public void createLevel() {

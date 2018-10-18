@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 public class Player extends GameObject {
 
@@ -30,10 +29,8 @@ public class Player extends GameObject {
 	public static int maxHP = 150;
 
 
-	//Texture tex = Game.getInstance();
-
-	Player(float x, float y, float w, float h, ObjectId id, Handler obj_handler, Color color, boolean isEntity){
-		super(x, y, w, h, id, obj_handler, color, isEntity);
+	Player(float x, float y, float w, float h, ObjectId id, Color color, boolean isEntity){
+		super(x, y, w, h, id, color, isEntity);
 
 		setX(x);
 		setY(y);
@@ -61,7 +58,7 @@ public class Player extends GameObject {
 		setX(getX()+getVelX() * dt);
 
 		// Gravitation
-		setY(getY()+ (getVelY()*dt));
+		setY(getY() + (getVelY()*dt));
 		if(falling || jumping) {
 			setVelY(getVelY()+gravity*dt);
 			if(getVelY() > Y_MAX_SPEED)
@@ -71,7 +68,7 @@ public class Player extends GameObject {
 
 		CollisionAndCondition(object);
 
-		if(isBouncing ) {
+		if(isBouncing) {
 			timeElapsed += time;
 			if (timeElapsed >= 0.01 ) {
 				timeElapsed = 0;
@@ -82,10 +79,6 @@ public class Player extends GameObject {
 
 		particleMgr.update(time);
 
-/*
-		 Direction is used to determine
-		 which way the bullet is supposed to go
-*/
 		handleBullets(this.direction, object, dt, time);
 	}
 
@@ -112,7 +105,7 @@ public class Player extends GameObject {
 	private void handleKeys(float dt) {
 		if(Game.keyDownMap.containsKey(KeyEvent.VK_SPACE))
 		{
-			for(GameObject e: Handler.entities)
+			for(GameObject e: Game.entities)
 			{
 				if(Game.getObjectDistance(this, e) <= Config.Entity.Enemy.vision)
 				{
@@ -121,7 +114,7 @@ public class Player extends GameObject {
 						Bullets.add( new Bullet(
 							getX()+(getWidth()/2),
 							getY()+(getHeight()/2-(getHeight()/4)),
-							getId(), handler, e.getX(), e.getY()
+							getId(), e.getX(), e.getY()
 						) );
 						e.showTargetBorder(true);
 						lastBullet = System.currentTimeMillis();
@@ -187,9 +180,15 @@ public class Player extends GameObject {
 
 	private void CollisionAndCondition(LinkedList<GameObject> object) {
 
-		for(int i = 0; i < handler.object.size(); i++) {
-			GameObject tempObject = handler.object.get(i);
+		for(int i = 0; i < Game.objects.size(); i++) {
+			
+			GameObject tempObject = Game.objects.get(i);
 
+			// avoid looking for collisions on objects outside of screen
+			if(!tempObject.isOnScreen)
+				continue;
+			
+			
 			if(tempObject.getId() == ObjectId.Block) {
 
 				if(getBoundsTop().intersects(tempObject.getBoundsBottom())){
@@ -224,7 +223,6 @@ public class Player extends GameObject {
 				if(tempObject.getId() == ObjectId.Obstacle) {
 					if(getBounds().intersects(tempObject.getBounds())){
 						this.kill();
-						System.out.println("hit obstacle!");
 					}
 				}
 
@@ -254,9 +252,7 @@ public class Player extends GameObject {
 	}
 
 
-	public int getCoinsCollected() {
-		return this.coins_collected;
-	}
+	public int getCoinsCollected() { return this.coins_collected; }
 
 	public void kill() {
 		setX(initialX);

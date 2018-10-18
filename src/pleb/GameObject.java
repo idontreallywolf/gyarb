@@ -10,7 +10,6 @@ import java.util.LinkedList;
 public abstract class GameObject {
 	
 	protected ObjectId id;
-	protected Handler handler;
 	protected Color selfColor;
 	
 	protected float x, y, initialX, initialY;
@@ -19,23 +18,24 @@ public abstract class GameObject {
 	protected float acc;
 	protected float previousHealth, currentHealth;
 	
+	protected boolean isOnScreen;
 	protected boolean isEntity;
 	protected boolean showTargetBorder;
 	protected boolean falling = true;
 	protected boolean jumping = false;
 	
-	public GameObject(float x, float y, float w, float h, ObjectId id, Handler handler, Color selfColor, boolean isEntity){
+	public GameObject(float x, float y, float w, float h, ObjectId id, Color selfColor, boolean isEntity){
 		this.x = initialX = x;
 		this.y = initialY = y;
 		this.width = w;
 		this.height = h;
 		this.id = id;
-		this.handler = handler;
 		this.selfColor = selfColor;
 		this.isEntity = isEntity;
 		if(isEntity) {
 			showTargetBorder = false;
 		}
+		this.isOnScreen = true;
 	}
 	
 	public abstract void update(LinkedList<GameObject> object, float dt, float time);

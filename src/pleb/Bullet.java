@@ -10,13 +10,13 @@ public class Bullet extends GameObject {
 	public boolean collided = false;
 	private double originX, originY, targetX, targetY;
 	
-	public Bullet(float x, float y, ObjectId id, Handler handler, double tX, double tY) {
-		super(x, y, Config.Bullet.size, Config.Bullet.size, id, handler, new Color(255,0,255), false);
+	public Bullet(float x, float y, ObjectId id, double tX, double tY) {
+		super(x, y, Config.Bullet.size, Config.Bullet.size, id, new Color(255,0,255), false);
 		setX(x);
 		setY(y);
 		setWidth(Config.Bullet.size);
 		setHeight(Config.Bullet.size);
-		this.handler = handler;
+		
 		this.originX = getX();
 		this.originY = getY();
 		this.targetX = tX;
@@ -48,9 +48,9 @@ public class Bullet extends GameObject {
 
 	private void checkCollision(LinkedList<GameObject> object) 
 	{
-		for(int i = 0; i < handler.object.size(); i++) 
+		for(int i = 0; i < Game.objects.size(); i++) 
 		{
-			GameObject tempObject = handler.object.get(i);
+			GameObject tempObject = Game.objects.get(i);
 			
 			if(tempObject.getId() == ObjectId.Block) 
 			{
