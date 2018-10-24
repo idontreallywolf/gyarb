@@ -22,9 +22,11 @@ public class Button extends JButton implements MouseListener {
 
 	
 	public Button(int x, int y, int width, int height, String btnText, int borderRadius, Color defaultColor, Color hoverColor, Color fontColor) {
+		// Default width
 		if(width <= 0)
 			width = 100;
 		
+		// Default height		
 		if(height <= 0)
 			height = 30;
 		
@@ -80,11 +82,11 @@ public class Button extends JButton implements MouseListener {
 		g2.dispose();
 }
 
-	
-	private void close() { Game.killGame = true; }
-	private void save() { }
-	private void pause() { Game.pauseGame = true; }
-	private void resume() { Game.pauseGame = false; }
+	private void save() 	{ }
+	private void close() 	{ Game.killGame = true; }
+	private void pause() 	{ Game.pauseGame = true; }
+	private void resume() 	{ Game.pauseGame = false; }
+	private void editMode() { Game.editorMode = true; }
 
 	@Override
 	public void mouseClicked(MouseEvent e) { 
@@ -94,6 +96,7 @@ public class Button extends JButton implements MouseListener {
 		else if(this.btnText.equals("Save")) 	save();
 		else if(this.btnText.equals("Pause"))	pause();
 		else if(this.btnText.equals("Resume"))	resume();
+		else if(this.btnText.equals("edit")) 	editMode();
 	}
 
 	@Override
