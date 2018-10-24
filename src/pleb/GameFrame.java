@@ -24,7 +24,7 @@ public class GameFrame extends JFrame {
 
 
 	/**
-		@param w  		- Frame width
+		@param w  			- Frame width
 		@param h 			- Frame height
 		@param title 		- Frame title
 		@param game 		- Thread which game runs on
