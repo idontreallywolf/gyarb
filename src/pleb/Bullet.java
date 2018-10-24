@@ -14,7 +14,7 @@ public class Bullet extends GameObject {
 		super(x, y, Config.Bullet.size, Config.Bullet.size, id, new Color(255,0,255), false);
 		setX(x);
 		setY(y);
-		setWidth(Config.Bullet.size);
+		setWidth(Config.Bullet.size*2);
 		setHeight(Config.Bullet.size);
 		
 		this.originX = getX();
