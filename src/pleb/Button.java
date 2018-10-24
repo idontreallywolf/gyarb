@@ -86,7 +86,6 @@ public class Button extends JButton implements MouseListener {
 	private void close() 	{ Game.killGame = true; }
 	private void pause() 	{ Game.pauseGame = true; }
 	private void resume() 	{ Game.pauseGame = false; }
-	private void editMode() { Game.editorMode = true; }
 
 	@Override
 	public void mouseClicked(MouseEvent e) { 
@@ -96,7 +95,6 @@ public class Button extends JButton implements MouseListener {
 		else if(this.btnText.equals("Save")) 	save();
 		else if(this.btnText.equals("Pause"))	pause();
 		else if(this.btnText.equals("Resume"))	resume();
-		else if(this.btnText.equals("edit")) 	editMode();
 	}
 
 	@Override
